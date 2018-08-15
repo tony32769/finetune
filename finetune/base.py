@@ -740,5 +740,8 @@ class BaseModel(object, metaclass=ABCMeta):
         self.is_trained = True
 
     def __del__(self):
-        if self.sess is not None:
-            self.sess.close()
+        try:
+            if self.sess is not None:
+                self.sess.close()
+        except AttributeError:
+            pass
